@@ -11,5 +11,5 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app/redis-go .
-EXPOSE 8080
+EXPOSE 4000 4001 4002 4003 4004
 CMD ["./redis-go"]

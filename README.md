@@ -25,7 +25,9 @@ Powershell:
 
 ### <b>Note*: redis-name for the name images create redis on docker</b>
 
-
+```
+docker run -p 8080:8080 myapp-image
+```
 
 ### Using Dockerfile for custom images Redis 
 
