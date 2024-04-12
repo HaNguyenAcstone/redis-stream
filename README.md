@@ -54,3 +54,20 @@ docker run --name my-custom-redis-container -d my-custom-redis
 docker run --name custom-redis -v /var/local/redis/redis.conf:/usr/loca
 l/etc/redis/redis.conf -d redis redis-server /usr/local/etc/redis/redis.conf
 ```
+
+```
+docker run --name my-nginx -v ~/nginx-conf/nginx.conf:/etc/nginx/nginx.conf:ro -p 8080:80 -d nginx
+```
+
+```
+docker run -d -p 4000:4000 -p 4001:4001 -p 4002:4002 -p 4003:4003 -p 4004:4004 my-gin-app
+```
+
+
+```
+docker exec -it nginx-custom nginx -t
+docker exec nginx-proxy ls /etc/nginx/conf.d/
+docker cp nginx-proxy:/etc/nginx/conf.d/default.conf ~/deploy/default.conf
+docker cp ~/deploy/nginx/default.conf nginx-proxy:/etc/nginx/conf.d
+docker exec nginx-proxy nginx -s reload
+```
