@@ -21,8 +21,8 @@ var (
 func init() {
 	// Khởi tạo kết nối Redis
 	redisClient = redis.NewClient(&redis.Options{
-		Addr: "192.168.2.39:6379", // Địa chỉ Redis server
-		DB:   0,                   // Sử dụng DB mặc định
+		Addr: "192.168.2.39:31143", // Địa chỉ Redis server
+		DB:   0,                    // Sử dụng DB mặc định
 	})
 
 	// Kiểm tra xem stream có tồn tại không, nếu không thì tạo
