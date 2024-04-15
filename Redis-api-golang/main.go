@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"math/rand"
@@ -28,18 +29,22 @@ func init() {
 }
 
 var orderIndex = 100000
+var streamName = "Orders"
 
 func pushOrdersToRedis() {
 	var info = map[string]interface{}{
+		"orderID":    orderIndex,
 		"deliveryID": RandomDeliveryID(6),
 		"status":     RandomStatus(),
 	}
 
-	err := redisClient.HMSet(ctx, "order:"+fmt.Sprint(orderIndex+1), info).Err()
-	if err != nil {
-		fmt.Println("Không thể lưu đơn hàng", err)
-		return
-	}
+	ordInfoJSON, _ := json.Marshal(info)
+
+	// Đẩy đơn hàng vào Redis Stream
+	redisClient.XAdd(ctx, &redis.XAddArgs{
+		Stream: streamName,
+		Values: map[string]interface{}{"order_info": string(ordInfoJSON)},
+	})
 
 	fmt.Printf("Đã lưu thông tin đơn hàng thành công %d", orderIndex+1)
 	orderIndex = orderIndex + 1

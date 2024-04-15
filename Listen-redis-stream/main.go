@@ -11,12 +11,12 @@ var ctx = context.Background()
 
 func main() {
 	rdb := redis.NewClient(&redis.Options{
-		Addr: "192.168.2.45:6379", // Địa chỉ Redis server
+		Addr: "192.168.38.128:6379", // Địa chỉ Redis server
 		DB:   0,
 	})
 
 	// Gọi hàm lắng nghe Redis Stream
-	streamKey := "Redis_Streams_Data" // tên của stream
+	streamKey := "Orders" // tên của stream
 	go listenRedisStream(rdb, streamKey)
 
 	select {} // Chặn main không cho thoát
