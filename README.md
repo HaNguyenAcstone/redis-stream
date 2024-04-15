@@ -72,6 +72,20 @@ docker cp ~/deploy/nginx/default.conf nginx-proxy:/etc/nginx/conf.d
 docker exec nginx-proxy nginx -s reload
 ```
 
+docker run -d --ulimit nofile=65535:65535 -p 3000:3000 
+
 ```
 docker run -d --name nginx-proxy --network nginx-go-network -p 3000:3000 -v /var/local/redis-stream/Redis-api-golang/nginx.conf:/etc/nginx/nginx.conf:ro nginx
+```
+
+```
+docker run -d --name go-app -p 4000:4000 your-go-image
+```
+
+```
+docker run -d --name go-redis-1 --network nginx-go-network -p 4000:4000 imageID
+```
+
+```
+ssh hanguyen@192.168.38.128
 ```

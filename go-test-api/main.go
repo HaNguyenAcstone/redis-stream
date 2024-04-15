@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	const numRuns = 20
+	const numRuns = 10
 
 	for run := 0; run < numRuns; run++ {
 		var wg sync.WaitGroup
@@ -81,7 +81,7 @@ func postRequest(url string, jsonData []byte) error {
 }
 
 func getRequest() error {
-	url := "http://192.168.38.128:3000/push_orders?key=ha&value=123"
+	url := "http://192.168.38.128:4000/push_orders?key=ha&value=123"
 
 	// Make GET request
 	_, err := http.Get(url)

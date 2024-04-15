@@ -7,7 +7,6 @@ import (
 	"math/rand"
 	"net/http"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -147,32 +146,12 @@ func getOrders(c *gin.Context) {
 	})
 }
 
-func startGinServer(port string) {
+func main() {
 	r := gin.Default()
 
 	// Thiết lập route
 	r.GET("/push_orders", pushOrders)
 	r.GET("/get-order", getOrders)
 
-	// Log và khởi động server
-	log.Printf("Starting Gin server on port %s\n", port)
-	if err := r.Run(":" + port); err != nil {
-		log.Fatalf("Failed to start Gin server on port %s: %v", port, err)
-	}
-}
-
-func main() {
-	var wg sync.WaitGroup
-	ports := []string{"4000", "4001", "4002", "4003", "4004"}
-
-	for _, port := range ports {
-		wg.Add(1)
-		go func(port string) {
-			defer wg.Done()
-			startGinServer(port)
-		}(port)
-	}
-
-	// Chờ cho tất cả servers kết thúc (trong trường hợp này thì không bao giờ xảy ra)
-	wg.Wait()
+	r.Run(":9000")
 }
