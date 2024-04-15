@@ -7,9 +7,13 @@ RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o redis-go .
 
 # Bước 2: Tạo image chạy ứng dụng
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY --from=builder /app/redis-go .
+FROM nginx:alpine
+COPY --from=builder /app/Redis-api-golang /usr/local/bin/redis-nginx
+# FROM alpine:latest
+# RUN apk --no-cache add ca-certificates
+# WORKDIR /root/
+# COPY --from=builder /app/redis-go .
+
 EXPOSE 4000 4001 4002 4003 4004
-CMD ["./redis-go"]
+# CMD ["./redis-go"]
+CMD ["sh", "-c", "/usr/local/bin/redis-nginx & nginx -g 'daemon off;'"]
