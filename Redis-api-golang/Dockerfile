@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o redis-nginx .
 
 # Bước 2: Tạo image chạy ứng dụng
 FROM nginx:alpine
-COPY --from=builder /app/Redis-api-golang /usr/local/bin/redis-nginx
+COPY --from=builder /app/redis-nginx /usr/local/bin/redis-nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 # FROM alpine:latest
 # RUN apk --no-cache add ca-certificates
