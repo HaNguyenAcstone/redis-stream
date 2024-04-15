@@ -71,3 +71,7 @@ docker cp nginx-proxy:/etc/nginx/conf.d/default.conf ~/deploy/default.conf
 docker cp ~/deploy/nginx/default.conf nginx-proxy:/etc/nginx/conf.d
 docker exec nginx-proxy nginx -s reload
 ```
+
+```
+docker run -d --name nginx-proxy --network nginx-go-network -p 3000:3000 -v /var/local/redis-stream/Redis-api-golang/nginx.conf:/etc/nginx/nginx.conf:ro nginx
+```
