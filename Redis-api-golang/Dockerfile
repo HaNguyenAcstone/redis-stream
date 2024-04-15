@@ -4,7 +4,7 @@ FROM golang:1.20.4 as builder
 WORKDIR /app
 COPY . .
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o redis-go .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o redis-nginx .
 
 # Bước 2: Tạo image chạy ứng dụng
 FROM nginx:alpine
